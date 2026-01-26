@@ -4,7 +4,9 @@
 
 ## Group Members
 
-## Aliza Lallani, 21035348
+Aliza Lallani, 21035348
+
+---
 
 ## Description
 
@@ -14,28 +16,32 @@
 
 ---
 
-## Interaction Instructions
+## Setup & Interaction Instructions
 
-Describe how to use or play your project.
+User starts by viewing instructions.
 
-- How does the user start?
-- What controls or keys do they use?
-- Any important visual or audio feedback to watch for?
+- Click X to close instructions
+- Click i to open instructions
 
-Example:
+User can then interact with the environment.
 
-> Press `S` to switch shapes and `R` to reset the canvas.
+- Move: A/D or ←/→
+- Jump: W, ↑, or Space
+  Pressing any of these keys will start calm background music.
+
+Flowers bloom at the center of 4 lilypads.
+
+- Landing on a lilypad and touching its center gradually blooms its flower.
+- Glowing sparkles provide visual feedback when a flower is fully bloomed.
 
 ---
 
 ## Assets
 
-List any images, sounds, or other files used in your assets/ folder.
-Include in-text citations for all assets that are not your own, and connect them to your reference list.
-
-Example:
-
-> - `assets/sound/beep.mp3` (created in GarageBand)
-> - `assets/image/background.png` (original artwork)
+> - `assets/sound/calm-music-fadee.mp3` (downloaded from Pixabay, fade-in created in iMovie)
 
 ---
+
+## References
+
+[1] geoffharvey. 2025. Calm — Heavenly Raindrops. Pixabay royalty‑free music track. https://pixabay.com/music/modern-classical-calm-heavenly-raindrops-382492/
