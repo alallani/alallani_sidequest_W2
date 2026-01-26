@@ -43,8 +43,13 @@ let platforms = [];
 let flowers = [];
 let clouds = [];
 
+// --- Help overlay / instructions ---
+let showInstructions = true; // initially visible
+let infoButtonRadius = 15;
+let overlayPadding = 40;
+
 function preload() {
-  bgMusic = loadSound("assets/sounds/calm-music.mp3");
+  bgMusic = loadSound("assets/sounds/calm-music-fade.mp3");
 }
 
 function setup() {
@@ -251,9 +256,9 @@ function draw() {
     f.particles = f.particles.filter((p) => p.alpha > 0);
   }
 
-  // --- HUD ---
-  fill(0);
-  text("Move: A/D or ←/→  •  Jump: Space/W/↑  •  Land on platforms", 10, 18);
+  // --- Info/help system ---
+  drawInfoButton();
+  if (showInstructions) drawInstructions();
 }
 
 // Axis-Aligned Bounding Box (AABB) overlap test
@@ -332,6 +337,63 @@ function drawBlobCircle(b) {
   endShape(CLOSE);
 }
 
+function drawInfoButton() {
+  if (!showInstructions) {
+    fill(255, 250, 240, 220); // match instructions overlay
+    stroke(200, 200, 200, 150); // optional soft border
+    strokeWeight(1.5);
+    ellipse(
+      width - infoButtonRadius - 10,
+      infoButtonRadius + 10,
+      infoButtonRadius * 2,
+    );
+
+    noStroke();
+    fill(50);
+    textAlign(CENTER, CENTER);
+    textSize(16);
+    text("i", width - infoButtonRadius - 10, infoButtonRadius + 10);
+  }
+}
+
+function drawInstructions() {
+  // Semi-transparent background
+  fill(255, 250, 240, 220);
+  rect(
+    overlayPadding,
+    overlayPadding,
+    width - 2 * overlayPadding,
+    height - 2 * overlayPadding,
+    12,
+  );
+
+  // Close button (X)
+  let xSize = 20;
+  let xLeft = width - overlayPadding - xSize - 10;
+  let xTop = overlayPadding + 10;
+  fill(220, 100, 100); // soft red
+  noStroke();
+  rect(xLeft, xTop, xSize, xSize, 4);
+
+  fill(255);
+  textAlign(CENTER, CENTER);
+  textSize(16);
+  text("X", xLeft + xSize / 2, xTop + xSize / 2);
+
+  // Instructions text
+  fill(30);
+  textAlign(LEFT, TOP);
+  textSize(16);
+  text(
+    "- Move: A/D or ←/→\n" +
+      "- Jump: W, ↑, or Space\n" +
+      "- Land on lilypads to bloom flowers\n\n" +
+      "Click X to close. Reopen anytime via i.\n",
+    overlayPadding + 20,
+    overlayPadding + 40,
+  );
+}
+
 // Jump input (only allowed when grounded)
 function keyPressed() {
   // Keys that are allowed to start music
@@ -349,11 +411,12 @@ function keyPressed() {
 
   // Start music on first valid movement input
   if (movementKey && !musicStarted) {
-    userStartAudio(); // unlock browser audio
-    bgMusic.setVolume(0); // start silent
-    bgMusic.loop();
-    bgMusic.amp(0.1, 4); // fade in over 4 seconds
-    musicStarted = true;
+    musicStarted = true; // immediately prevent repeated calls
+    userStartAudio().then(() => {
+      bgMusic.setVolume(0);
+      bgMusic.loop();
+      bgMusic.amp(0.1, 4); // fade in over 4 seconds
+    });
   }
 
   // --- Jump input (unchanged behaviour) ---
@@ -363,6 +426,37 @@ function keyPressed() {
   ) {
     blob3.vy = blob3.jumpV;
     blob3.onGround = false;
+  }
+}
+
+function mousePressed() {
+  // Click info button to open overlay
+  if (!showInstructions) {
+    let d = dist(
+      mouseX,
+      mouseY,
+      width - infoButtonRadius - 10,
+      infoButtonRadius + 10,
+    );
+    if (d < infoButtonRadius) {
+      showInstructions = true;
+      return;
+    }
+  }
+
+  // Click X button to close overlay
+  if (showInstructions) {
+    let xSize = 20;
+    let xLeft = width - overlayPadding - xSize - 10;
+    let xTop = overlayPadding + 10;
+    if (
+      mouseX > xLeft &&
+      mouseX < xLeft + xSize &&
+      mouseY > xTop &&
+      mouseY < xTop + xSize
+    ) {
+      showInstructions = false;
+    }
   }
 }
 
