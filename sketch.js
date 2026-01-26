@@ -1,4 +1,6 @@
 // Y-position of the floor (ground level)
+let bgMusic;
+let musicStarted = false;
 let floorY3;
 
 // Player character (soft, animated blob)
@@ -41,6 +43,10 @@ let platforms = [];
 let flowers = [];
 let clouds = [];
 
+function preload() {
+  bgMusic = loadSound("assets/sounds/calm-music.mp3");
+}
+
 function setup() {
   createCanvas(640, 360);
 
@@ -57,10 +63,10 @@ function setup() {
     { x: 0, y: height * 0.85, w: width, h: height * 0.15, type: "sand" },
 
     // Lilypads spread out vertically and horizontally
-    { x: 100, y: height * 0.68, w: 120, h: 18, type: "lilypad" }, // first lilypad
-    { x: 220, y: height * 0.6 - 30, w: 100, h: 18, type: "lilypad" }, // second lilypad
-    { x: 380, y: height * 0.34, w: 130, h: 20, type: "lilypad" }, // third lilypad
-    { x: 520, y: height * 0.59, w: 90, h: 16, type: "lilypad" }, // fourth lilypad
+    { x: 100, y: height * 0.68, w: 100, h: 18, type: "lilypad" }, // first lilypad
+    { x: 247, y: height * 0.63 - 30, w: 120, h: 18, type: "lilypad" }, // second lilypad
+    { x: 385, y: height * 0.38, w: 126, h: 20, type: "lilypad" }, // third lilypad
+    { x: 526, y: height * 0.54, w: 90, h: 16, type: "lilypad" }, // fourth lilypad
   ];
 
   // Start the blob resting on the floor
@@ -328,6 +334,29 @@ function drawBlobCircle(b) {
 
 // Jump input (only allowed when grounded)
 function keyPressed() {
+  // Keys that are allowed to start music
+  const movementKey =
+    key === "A" ||
+    key === "a" ||
+    key === "D" ||
+    key === "d" ||
+    key === "W" ||
+    key === "w" ||
+    key === " " ||
+    keyCode === LEFT_ARROW ||
+    keyCode === RIGHT_ARROW ||
+    keyCode === UP_ARROW;
+
+  // Start music on first valid movement input
+  if (movementKey && !musicStarted) {
+    userStartAudio(); // unlock browser audio
+    bgMusic.setVolume(0); // start silent
+    bgMusic.loop();
+    bgMusic.amp(0.1, 4); // fade in over 4 seconds
+    musicStarted = true;
+  }
+
+  // --- Jump input (unchanged behaviour) ---
   if (
     (key === " " || key === "W" || key === "w" || keyCode === UP_ARROW) &&
     blob3.onGround
