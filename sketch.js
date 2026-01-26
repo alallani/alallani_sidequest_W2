@@ -1,7 +1,6 @@
-// Y-position of the floor (ground level)
 let bgMusic;
 let musicStarted = false;
-let floorY3;
+let floorY3; // Y-position of the floor (ground level)
 
 // Player character (soft, animated blob)
 let blob3 = {
@@ -44,12 +43,12 @@ let flowers = [];
 let clouds = [];
 
 // --- Help overlay / instructions ---
-let showInstructions = true; // initially visible
+let showInstructions = true; // Initially visible
 let infoButtonRadius = 15;
 let overlayPadding = 40;
 
 function preload() {
-  bgMusic = loadSound("assets/sounds/calm-music-fade.mp3");
+  bgMusic = loadSound("assets/sounds/calm-music-fade.mp3"); // [1]
 }
 
 function setup() {
@@ -68,10 +67,10 @@ function setup() {
     { x: 0, y: height * 0.85, w: width, h: height * 0.15, type: "sand" },
 
     // Lilypads spread out vertically and horizontally
-    { x: 100, y: height * 0.68, w: 100, h: 18, type: "lilypad" }, // first lilypad
-    { x: 247, y: height * 0.63 - 30, w: 120, h: 18, type: "lilypad" }, // second lilypad
-    { x: 385, y: height * 0.38, w: 126, h: 20, type: "lilypad" }, // third lilypad
-    { x: 526, y: height * 0.54, w: 90, h: 16, type: "lilypad" }, // fourth lilypad
+    { x: 100, y: height * 0.68, w: 100, h: 18, type: "lilypad" }, // First lilypad
+    { x: 247, y: height * 0.63 - 30, w: 120, h: 18, type: "lilypad" }, // Second lilypad
+    { x: 385, y: height * 0.38, w: 126, h: 20, type: "lilypad" }, // dThir lilypad
+    { x: 526, y: height * 0.54, w: 90, h: 16, type: "lilypad" }, // Fourth lilypad
   ];
 
   // Start the blob resting on the floor
@@ -89,19 +88,19 @@ function setup() {
       fullyBloomed: false,
     }));
 
-  // --- Add clouds ---
+  // Add clouds
   for (let i = 0; i < 5; i++) {
     clouds.push({
       x: random(width),
       y: random(height * 0.05, height * 0.25),
       size: random(50, 120),
-      speed: random(0.15, 0.25), // slow drift
+      speed: random(0.15, 0.25), // Slow drift
     });
   }
 }
 
 function draw() {
-  drawBackground(); // calm beach background
+  drawBackground(); // Calm beach background
 
   // --- Draw all platforms ---
   for (let i = 0; i < platforms.length; i++) {
@@ -112,7 +111,7 @@ function draw() {
       fill(245, 230, 180);
       rect(p.x, p.y, p.w, p.h, 8);
     } else if (p.type === "lilypad") {
-      fill(120, 200, 140, 220); // soft green
+      fill(120, 200, 140, 220); // Soft green
       ellipse(p.x + p.w / 2, p.y + p.h / 2, p.w, p.h);
     }
   }
@@ -131,7 +130,7 @@ function draw() {
   blob3.vy += blob3.gravity;
 
   // Cap fall speed for extra soft landing
-  blob3.vy = constrain(blob3.vy, -Infinity, 4.5); // max downward speed 4.5
+  blob3.vy = constrain(blob3.vy, -Infinity, 4.5); // Max downward speed 4.5
 
   // --- Collision representation ---
   // We collide using a rectangle (AABB),
@@ -206,7 +205,7 @@ function draw() {
   blob3.t += blob3.tSpeed;
   drawBlobCircle(blob3);
 
-  //Draw flowers on lilypads
+  // Draw flowers on lilypads
   for (let f of flowers) {
     if (f.bloom <= 0) continue; // invisible at first
 
@@ -228,7 +227,7 @@ function draw() {
     // --- Spawn particles once bloom is fully done ---
     if (f.bloom >= 1 && !f.fullyBloomed) {
       for (let i = 0; i < 10; i++) {
-        // spawn 10 particles at once
+        // Spawn 10 particles at once
         f.particles.push({
           x: f.x + random(-5, 5),
           y: f.y + random(-5, 5),
@@ -295,7 +294,7 @@ function drawBackground() {
   fill(245, 230, 180, 255);
   rect(0, height * 0.85, width, height * 0.15);
 
-  // Clouds can stay semi-transparent if you want them to be soft
+  // Clouds
   for (let c of clouds) {
     drawingContext.shadowBlur = 6;
     drawingContext.shadowColor = "rgba(255,255,255,0.08)";
@@ -339,8 +338,8 @@ function drawBlobCircle(b) {
 
 function drawInfoButton() {
   if (!showInstructions) {
-    fill(255, 250, 240, 220); // match instructions overlay
-    stroke(200, 200, 200, 150); // optional soft border
+    fill(255, 250, 240, 220); // Match instructions overlay
+    stroke(200, 200, 200, 150); // Soft border
     strokeWeight(1.5);
     ellipse(
       width - infoButtonRadius - 10,
@@ -371,7 +370,7 @@ function drawInstructions() {
   let xSize = 20;
   let xLeft = width - overlayPadding - xSize - 10;
   let xTop = overlayPadding + 10;
-  fill(220, 100, 100); // soft red
+  fill(220, 100, 100); // Soft red
   noStroke();
   rect(xLeft, xTop, xSize, xSize, 4);
 
@@ -411,15 +410,15 @@ function keyPressed() {
 
   // Start music on first valid movement input
   if (movementKey && !musicStarted) {
-    musicStarted = true; // immediately prevent repeated calls
+    musicStarted = true; // Immediately prevent repeated calls
     userStartAudio().then(() => {
       bgMusic.setVolume(0);
       bgMusic.loop();
-      bgMusic.amp(0.1, 4); // fade in over 4 seconds
+      bgMusic.amp(0.1, 4); // Fade in over 4 seconds
     });
   }
 
-  // --- Jump input (unchanged behaviour) ---
+  // --- Jump input ---
   if (
     (key === " " || key === "W" || key === "w" || keyCode === UP_ARROW) &&
     blob3.onGround
