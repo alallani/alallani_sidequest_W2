@@ -45,3 +45,5 @@ Flowers bloom at the center of 4 lilypads.
 ## References
 
 [1] geoffharvey. 2025. Calm — Heavenly Raindrops. Pixabay royalty‑free music track. https://pixabay.com/music/modern-classical-calm-heavenly-raindrops-382492/
+
+[2] Headspace. Mini meditation | Unwind. YouTube, Dec. 12, 2018. https://www.youtube.com/watch?v=ldFD-L-Csz0
