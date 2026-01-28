@@ -12,7 +12,7 @@ Aliza Lallani, 21035348
 
 > This project invites users to navigate a virtual environment using keyboard controls, causing flowers to bloom along the way.
 > It explores how to communicate a sense of calm and serenity through design.
-> It was inspired by the cozy atmosphere of Tiny Bookshop (video game) and the subtle animations of Headspace (mental health app).
+> It was inspired by the cozy atmosphere of Tiny Bookshop (video game) and the subtle animations of Headspace (mental health app) [2].
 
 ---
 
@@ -38,7 +38,7 @@ Flowers bloom at the center of 4 lilypads.
 
 ## Assets
 
-> - `assets/sound/calm-music-fadee.mp3` (downloaded from Pixabay, fade-in created in iMovie)
+> - `assets/sound/calm-music-fadee.mp3` (downloaded from Pixabay, fade-in created in iMovie) [1]
 
 ---
 
