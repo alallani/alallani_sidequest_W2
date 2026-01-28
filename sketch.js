@@ -387,7 +387,7 @@ function drawInstructions() {
     "- Move: A/D or ←/→\n" +
       "- Jump: W, ↑, or Space\n" +
       "- Land on lilypads to bloom flowers\n" +
-      "-Allow sound to enhance the experience\n\n" +
+      "- Allow sound to enhance the experience\n\n" +
       "Click X to close. Reopen anytime via i.\n",
     overlayPadding + 20,
     overlayPadding + 40,
