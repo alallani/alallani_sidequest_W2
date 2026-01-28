@@ -38,7 +38,7 @@ Flowers bloom at the center of 4 lilypads.
 
 ## Assets
 
-> - `assets/sound/calm-music-fadee.mp3` (downloaded from Pixabay, fade-in created in iMovie) [1]
+> - `assets/sound/calm-music-fade.mp3` (downloaded from Pixabay, fade-in created in iMovie) [1]
 
 ---
 
